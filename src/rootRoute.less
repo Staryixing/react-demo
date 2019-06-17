@@ -1,0 +1,84 @@
+@import './commonStyles/commonStyleConstants.less';
+
+.test{
+    color: red;
+}
+
+.titleBarRoot{
+    background-color: @fill-title;
+    width:100%;
+    transition: all 0.5s;
+    // height:128rem/@pTor;
+}
+.titleBar{
+    width:100%;
+    height: 100rem/@pTor;
+    display:flex;
+    align-items: center;
+    // background-color: @fill-title;
+    padding:0 84rem/@pTor;
+    .jinghui{
+        width:90rem/@pTor;
+        height:90rem/@pTor;
+        margin-right:30rem/@pTor;
+    }
+    .title{
+        color:white;
+        font-size: 34rem/@pTor;
+    }
+    .navList{
+        display: flex;
+        flex-direction: row;
+        margin-left:60rem/@pTor;
+        label{
+            width: 300rem/@pTor;
+            cursor: pointer;
+        }
+    }
+    .actionArea{
+        width:536rem/@pTor;
+        height:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .btn {
+            width: 238rem/@pTor;
+            background-color: rgba(1, 1, 1, 0);
+            height: 78rem/@pTor;
+            border: 1px solid rgba(255, 255, 255, 1);
+            border-radius: 8rem/@pTor;
+            font-size: 40rem/@pTor;
+            color:rgba(255,253,253,1);
+            :global(span){
+                margin-left:40rem/@pTor;
+            }
+        }
+    }
+
+    .connectionArea{
+        min-width: 600rem/@pTor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 50rem/@pTor;
+        color: white;
+        .prompt{
+            width:170rem/@pTor;
+            border-right: solid 2px white;
+            .bigPrompt{
+                font-size: 32rem/@pTor;
+            }
+            .smallPrompt{
+                font-size: 20rem/@pTor;
+            }
+        }
+    }
+
+}
+
+.content{
+    width:100%;
+    height:calc(100% - 128rem/@pTor);
+    // min-height:1072rem/@pTor;
+    overflow: hidden;
+}
