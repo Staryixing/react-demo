@@ -4,7 +4,7 @@ import {Route, Switch, Redirect} from 'dva/router';
 import lotteryServices from '@routes/lotteryService/lotteryService.jsx'
 import otherServices from '@routes/otherServices/otherServices'
 import publicServices from '@routes/publicSecurity/publicSecurity.jsx'
-// import traveServices from '@routes/traveService/traveService.jsx'
+import traveServices from '@routes/traveService/traveService.jsx'
 import style from './mainPage.less'
 
 
@@ -24,6 +24,7 @@ class MainPage extends React.Component {
         this.jumpToFunctionPage = this.jumpToFunctionPage.bind(this)
     }
     jumpToFunctionPage(pathName){
+      console.log('pathName',pathName)
       this.props.history.push(pathName)
     }
      // 顶部导航栏
@@ -48,9 +49,9 @@ class MainPage extends React.Component {
               <div className = {style.titleBarRoot} >{ this.renderTitleBar() }</div>
               <div className={style.content}>
                 <Switch>
-                  {/* <Route exact path="/mainpage/travelServicesMenu" component={traveServices}/> */}
-                  <Route exact path="/mainpage/lotteryServices" component={lotteryServices}/>
                   <Route exact path="/mainpage/publicSecurityServicesMenu" component={publicServices}/>
+                  <Route exact path="/mainpage/travelServicesMenu" component={traveServices}/>
+                  <Route exact path="/mainpage/lotteryServices" component={lotteryServices}/>
                   <Route exact path="/mainpage/otherServicesMenu" component={otherServices}/>
                   <Redirect to="/mainpage" />
                 </Switch>
