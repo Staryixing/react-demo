@@ -19,7 +19,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron-start": "electron ."
+    "electron-start": "electron .",
+    "mock": "node ./mock/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

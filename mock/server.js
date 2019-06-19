@@ -1,8 +1,14 @@
-let express = require("express");
-let app = express();
+var express = require("express");
+var app = express();
 
-app.get('/login', function(req, res){
-  res.send('hello world')
+var router = express.Router();
+
+app.get("/", function(req, res) {
+  res.send("hello world");
 });
 
-app.listen(3002)
+router.use("/test", require("./test"));
+
+app.use("/api", router);
+
+app.listen(3002);
