@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 
 router.use('/profile', function(req, res) {
-    console.log(req.body);
+    console.log(req.body, 'body');
     var data = Mock.mock({
       'list|1-10': [{
         'id|+1': 1

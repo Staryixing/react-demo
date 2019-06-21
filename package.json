@@ -38,5 +38,6 @@
     "express": "^4.17.1",
     "mockjs": "^1.0.1-beta3",
     "react-app-rewired": "^2.1.1"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

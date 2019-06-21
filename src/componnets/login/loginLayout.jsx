@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { connect } from 'dva';
 import { Form, Icon, Input, Button } from 'antd';
 import style from './loginLayout.less'
+import LoginServices from '@services/login'
 
 class LoginLayout extends Component{
   constructor(props){
@@ -16,6 +17,14 @@ class LoginLayout extends Component{
         this.props.loginJump()       
       }
     });
+  }
+
+  componentDidMount(){
+    this.getMsg()
+  }
+
+  async getMsg(){
+    const res = await LoginServices.getDevices({});
   }
 
   render(){

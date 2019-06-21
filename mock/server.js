@@ -7,7 +7,7 @@ app.get("/", function(req, res) {
   res.send("hello world");
 });
 
-router.use("/test", require("./test"));
+router.use("/test", require("./user"));
 
 app.use("/api", router);
 
