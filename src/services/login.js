@@ -12,7 +12,7 @@ class LoginServices extends ApiService{
     params,
     needLoading
   }) => {
-    return this.get(Constant.API_HOST + '/api/test/profile', {
+    return this.get('/api/test/profile', {
       params,
       headers,
       needLoading

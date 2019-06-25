@@ -11,4 +11,4 @@ router.use("/test", require("./user"));
 
 app.use("/api", router);
 
-app.listen(3002);
+app.listen(8080);

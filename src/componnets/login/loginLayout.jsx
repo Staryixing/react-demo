@@ -25,6 +25,7 @@ class LoginLayout extends Component{
 
   async getMsg(){
     const res = await LoginServices.getDevices({});
+    console.log('res', res)
   }
 
   render(){
