@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import AccountCard from '@componnets/AccountCard/AccountCard.jsx';
 
-class publicBackend extends React.Component {
+class PublicBackend extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -11,10 +12,11 @@ class publicBackend extends React.Component {
     render() {
         return (
             <div>
-                后端
+              组件
+              <AccountCard />
             </div>
         )
     }
 }
 
-export default publicBackend
+export default PublicBackend

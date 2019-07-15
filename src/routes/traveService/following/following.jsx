@@ -1,6 +1,6 @@
 import React from 'react'
 
-class publicFollow extends React.Component {
+class PublicFollow extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -17,4 +17,4 @@ class publicFollow extends React.Component {
     }
 }
 
-export default publicFollow
+export default PublicFollow

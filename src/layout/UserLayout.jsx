@@ -23,7 +23,7 @@ class UserLayout extends Component {
   }
 
   loginJump(){
-    this.props.history.push('/mainpage/publicSecurityServicesMenu')
+    this.props.history.push('/mainpage')
   }
 
   render() {

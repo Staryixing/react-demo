@@ -20,7 +20,7 @@ class LoginLayout extends Component{
   }
 
   componentDidMount(){
-    this.getMsg()
+    // this.getMsg()
   }
 
   async getMsg(){

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class publicRecommend extends React.Component {
+class PublicRecommend extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -18,4 +18,4 @@ class publicRecommend extends React.Component {
     }
 }
 
-export default publicRecommend
+export default PublicRecommend

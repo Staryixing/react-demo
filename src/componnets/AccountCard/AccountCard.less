@@ -1,0 +1,93 @@
+.cardContent{
+    width: 300px;
+    height: 340px;
+    background:rgba(255,255,255,1);
+    border-radius:3px;
+    border:1px solid rgba(233,233,233,1);
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+  .cardHeader{
+    width: 100%;
+    height: 60%;
+    background:rgba(227,240,252,1);
+    position: relative;
+    .picTxt{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cardImg{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .cardFooter{
+    
+    .accountFoot{
+      text-align: center;
+      .footerAccount{
+        font-size:20px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(0,0,0,0.85);
+        margin-top: 20px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        padding: 0 20px;
+      }
+      .footerEquip{
+        font-size:16px;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+        color:rgba(0,0,0,0.45);
+        margin-top: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow:hidden;
+      }
+    }
+    .footerUser{
+      padding-left: 30px;
+      padding-top: 24px;
+      font-size:18px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(0,0,0,0.45);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow:hidden;
+      .nameWrapper{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow:hidden;
+      }
+      .userName{
+        font-size:20px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(0,0,0,0.85);
+      }
+      .userPosition{
+        font-size:20px;
+        font-family:PingFangSC-Medium;
+        margin-left: 20px;
+      }
+      .userAddress{
+        margin-top: 6px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow:hidden;
+      }
+      .usertime{
+        margin-top: 6px;
+        font-size:15px;
+      }
+    }
+  }
+}

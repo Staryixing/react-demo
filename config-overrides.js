@@ -15,6 +15,7 @@ let configAlias = function(config,env){
     "@models": path.resolve(__dirname,  "src", "models"),
     "@services": path.resolve(__dirname,  "src", "services"),
     "@systemPages": path.resolve(__dirname,  "src", "systemPages"),
+    "@common": path.resolve(__dirname,"src","common")
   })
   if ('production' === config.mode) {
     config.output.publicPath = './';

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'dva/router';
 
-import lotteryServices from '@routes/lotteryService/lotteryService.jsx'
-import otherServices from '@routes/otherServices/otherServices'
-import publicServices from '@routes/publicSecurity/publicSecurity.jsx'
-import traveServices from '@routes/traveService/traveService.jsx'
+import LotteryService from '@routes/lotteryService/lotteryService.jsx'
+import OtherServices from '@routes/otherServices/otherServices'
+import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx'
+import TraveService from '@routes/traveService/traveService.jsx'
 import style from './mainPage.less'
 
 
@@ -45,15 +45,16 @@ class MainPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{ height: '100%', width: '100%' }}>
               <div className = {style.titleBarRoot} >{ this.renderTitleBar() }</div>
               <div className={style.content}>
                 <Switch>
-                  <Route exact path="/mainpage/publicSecurityServicesMenu" component={publicServices}/>
-                  <Route exact path="/mainpage/travelServicesMenu" component={traveServices}/>
-                  <Route exact path="/mainpage/lotteryServices" component={lotteryServices}/>
-                  <Route exact path="/mainpage/otherServicesMenu" component={otherServices}/>
-                  <Redirect to="/mainpage" />
+                  <Route path="/mainpage/travelServicesMenu" component={TraveService}/>
+                  <Route path="/mainpage/publicSecurityServicesMenu" component={PublicSecurity}/>
+                  <Route path="/mainpage/lotteryServices" component={LotteryService}/>
+                  <Route path="/mainpage/otherServicesMenu" component={OtherServices}/>
+                  <Route path="/mainpage" />
+                  {/* <Redirect to="/mainpage" /> */}
                 </Switch>
               </div>
             </div>

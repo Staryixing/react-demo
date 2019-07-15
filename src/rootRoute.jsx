@@ -18,9 +18,9 @@ class RootContainer extends React.Component {
       return (
         <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}>
             <Switch>
-              <Route exact path="/login" component={UserLayout} />
+              <Route exact path="/" component={UserLayout} />
               <Route path="/mainpage" component={MainPage} />
-              <Redirect to="/login" />
+              {/* <Redirect to="/login" /> */}
             </Switch>
         </div>
       )

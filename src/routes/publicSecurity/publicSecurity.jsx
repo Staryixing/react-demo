@@ -1,5 +1,7 @@
-import React from 'react'
-import LeaveMas from '../../componnets/comments/comments'
+import React from 'react';
+import Mouse from '@componnets/CatMouse/MouseWithCat/index.jsx';
+import Cat from '@componnets/CatMouse/cat/index.jsx';
+
 import style from './publicSecurity.less'
 const navlist = [
   {
@@ -133,8 +135,9 @@ class PublicSecurity extends React.Component {
     }
 
     componentDidMount(){
-     console.log("返回", this.foo(navlist));
+     // console.log("返回", this.foo(navlist));
     }
+    // 递归例子
     foo = (arr) => {
       let arr2 = [];
       for(let i=0; i< arr.length; i++){
@@ -156,11 +159,11 @@ class PublicSecurity extends React.Component {
 
     render() {
       return (
-        <div>
-            <div className={style.comments}>
-              评论区
-            </div>
-            <LeaveMas></LeaveMas>
+        <div className={style.root}>
+          <h1>移动鼠标!</h1>
+          <Mouse render={mouse => (
+            <Cat mouse={mouse} />
+          )}/>
         </div>
       )
     }
