@@ -1,6 +1,5 @@
 import React from 'react';
 import * as d3 from 'd3';
-import { wallColumn,parkingArea,deviceArea } from '../../mock/mapdata'
 
 import jinghui from '../../asset/car.jpeg'
 
@@ -57,7 +56,64 @@ class OtherServices extends React.Component {
     componentDidMount(){
       this.run1()
     }
+    run (){
+      var data = [
+        {month: "Q1-2016", apples: 3840, bananas: 1920, cherries: -1960, dates: -400},
+        {month: "Q2-2016", apples: 1600, bananas: 1440, cherries: -960, dates: -400},
+        {month: "Q3-2016", apples:  640, bananas:  960, cherries: -640, dates: -600},
+        {month: "Q4-2016", apples:  320, bananas:  480, cherries: -640, dates: -400}
+      ];
 
+      var series = d3.stack()
+          .keys(["apples", "bananas", "cherries", "dates"])
+          .offset(d3.stackOffsetDiverging)
+          (data);
+
+      var svg = d3.select("svg"),
+          margin = {top: 20, right: 30, bottom: 30, left: 60},
+          width = +svg.attr("width"),
+          height = +svg.attr("height");
+
+      var x = d3.scaleBand()
+          .domain(data.map(function(d) { return d.month; }))
+          .rangeRound([margin.left, width - margin.right])
+          .padding(0.1);
+
+      var y = d3.scaleLinear()
+          .domain([d3.min(series, stackMin), d3.max(series, stackMax)])
+          .rangeRound([height - margin.bottom, margin.top]);
+
+      var z = d3.scaleOrdinal(d3.schemeCategory10);
+
+      svg.append("g")
+        .selectAll("g")
+        .data(series)
+        .enter().append("g")
+          .attr("fill", function(d) { return z(d.key); })
+        .selectAll("rect")
+        .data(function(d) { return d; })
+        .enter().append("rect")
+          .attr("width", x.bandwidth)
+          .attr("x", function(d) { return x(d.data.month); })
+          .attr("y", function(d) { return y(d[1]); })
+          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+
+      svg.append("g")
+          .attr("transform", "translate(0," + y(0) + ")")
+          .call(d3.axisBottom(x));
+
+      svg.append("g")
+          .attr("transform", "translate(" + margin.left + ",0)")
+          .call(d3.axisLeft(y));
+
+      function stackMin(serie) {
+        return d3.min(serie, function(d) { return d[0]; });
+      }
+
+      function stackMax(serie) {
+        return d3.max(serie, function(d) { return d[1]; });
+      }
+    }
     rightMove(){
       console.log('右移')
       this.setState({
@@ -80,8 +136,9 @@ class OtherServices extends React.Component {
     }
 
     run1 (){
-      let w = 1200,
-          h =870,
+
+      let w = 960,
+          h =500,
           p = 20,
           x = d3.scaleLinear().domain([0,1]).range([p, w - p]),
           y= d3.scaleLinear().domain([0, 1]).range([h - p, p]);
@@ -110,72 +167,50 @@ class OtherServices extends React.Component {
         .attr("x2", w - p + 1);
 
       // 边框线
+      let linedata = [[40, 460],[40, 100],[100,100],[100,40],[860, 40],[860, 460],[200, 460]]
       let lineGenerator = d3.line().x(function(d){
-        return d.x
+        return d[0]
       })
       .y(function(d){
-        return d.y
+        return d[1]
       })
-      // 墙柱障碍物
-      var border = svg.selectAll("borders").data(wallColumn).enter().append("path")
-      .attr('stroke', 'rgb(250,250,250)')
+      svg.append("path")
+      .attr('stroke', 'rgb(141,281,200)')
       .attr('stroke-width', '4')
-      .attr('fill', function(d,i){
-        return d.type === 1 ? 'rgb(250,250,250)':'none'
-      })
-      .attr('d', function(d, i){
-        return lineGenerator(d.points)
-      })
+      .attr('fill', 'none')
+      .attr('d', lineGenerator(linedata))
 
-      // 泊车取车区域
-      var parking = svg.selectAll("parkings").data(parkingArea).enter().append("path")
-      .attr('stroke', 'none')
-      .attr('stroke-width', '4')
-      .attr('fill', 'rgb(88,142,192)')
-      .attr('d', function(d, i){
-        return lineGenerator(d.points)
-      })
-
-      // 设备区域
-      var devices = svg.selectAll("devices").data(deviceArea).enter().append("path")
-      .attr('stroke', 'none')
-      .attr('stroke-width', '4')
-      .attr('fill', 'rgb(92,105,202)')
-      .attr('d', function(d, i){
-        return lineGenerator(d.points)
-      })
-
-      // // 锁闭区域
-      // var lock = svg.selectAll("locks").data(this.state.lockposition).enter().append("rect")
-      //   .attr("fill", "rgb(109,83, 154)")
-      //   .attr('stroke', 'rgb(127,113,165)')
-      //   .attr('stroke-width', '2')
-      //   .attr("x", function(d, i){
-      //     return d.x;
-      //   }).attr("y", function(d){
-      //     return d.y; 
-      //   }).attr("width",function(d){
-      //     return d.w
-      //   })
-      //   .attr("height", function(d){
-      //     return d.h
-      //   })
+      // 锁闭区域
+      var lock = svg.selectAll("locks").data(this.state.lockposition).enter().append("rect")
+        .attr("fill", "rgb(109,83, 154)")
+        .attr('stroke', 'rgb(127,113,165)')
+        .attr('stroke-width', '2')
+        .attr("x", function(d, i){
+          return d.x;
+        }).attr("y", function(d){
+          return d.y; 
+        }).attr("width",function(d){
+          return d.w
+        })
+        .attr("height", function(d){
+          return d.h
+        })
 
       // 停车位置
-      // let parkspace = svg.selectAll("parks").data(this.state.parkspace).enter().append("rect")
-      //   .attr("fill", "rgb(47,96,162)")
-      //   .attr('stroke', 'rgb(83,164,213)')
-      //   .attr('stroke-width', '2')
-      //   .attr("x", function(d, i){
-      //     return d.x;
-      //   }).attr("y", function(d){
-      //     return d.y; 
-      //   }).attr("width",function(d){
-      //     return d.w
-      //   })
-      //   .attr("height", function(d){
-      //     return d.h
-      //   })
+      let parkspace = svg.selectAll("parks").data(this.state.parkspace).enter().append("rect")
+        .attr("fill", "rgb(47,96,162)")
+        .attr('stroke', 'rgb(83,164,213)')
+        .attr('stroke-width', '2')
+        .attr("x", function(d, i){
+          return d.x;
+        }).attr("y", function(d){
+          return d.y; 
+        }).attr("width",function(d){
+          return d.w
+        })
+        .attr("height", function(d){
+          return d.h
+        })
 
         // 汽车
        var imgs = svg.selectAll('image').data(this.state.carsposition).enter()
@@ -222,7 +257,7 @@ class OtherServices extends React.Component {
     render() {
         return (
             <div>
-              <svg width="1200" height="870" style={{ backgroundColor: 'rgb(59,72,185)' }}></svg>
+              <svg width="960" height="500" style={{ backgroundColor: 'rgb(52,70,130)' }}></svg>
               <button onClick={ this.rightMove }>右移</button>
             </div>
         )

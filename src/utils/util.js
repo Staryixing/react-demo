@@ -354,4 +354,42 @@ const Utils = {
 
 }
 
-export { Utils }
+/**
+ * 节流函数
+ * 
+ * 返回函数
+ * @returns function
+ */
+
+throttle = (func, delay)=> {
+  let oldDate = 0;
+  return function(){
+    let newDate = new Date();
+    if(newDate -oldDate > delay){
+      oldDate = newDate
+      return func.apply(this, arguments)
+    }
+  }
+}
+/**
+ * 防抖函数
+ * 
+ * 返回函数
+ * @returns function
+ */
+function debounce(func, delay) {
+    var timer = null;
+    return function () {
+        let that = this;
+        let args = arguments;
+        if (timer){
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+            func.call(that, ...args);
+            clearTimeout(timer);
+            timer = null;
+        }, delay);
+    }
+}
+export { Utils, debounce, throttle }

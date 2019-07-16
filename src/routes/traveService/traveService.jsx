@@ -6,6 +6,7 @@ import Model from '@componnets/Mask/index.jsx';
 import DropDown from '@componnets/DropDown/index.jsx';
 import CustomTextInput from '@componnets/AutoFocusInput/index.jsx';
 import NewComponent from '@common/Input.js';
+import { debounce,throttle } from '@utils/util.js';
 
 import PublicBackend from './backend/backend'
 import PublicFollow from './following/following'
@@ -31,7 +32,7 @@ function Btm() {
           <button
             onClick={toggle}
             style={{ backgroundColor: theme }}>
-            点击
+            Context
           </button>
         )
       }
@@ -133,7 +134,10 @@ class TraveService extends React.Component {
     submit = () => {
       console.log(this.props, 'porps')
     }
-
+    /**防抖 */
+    preventDebounce = () => {
+      console.log('打印')
+    }
     render() {
       return (
         <div>
@@ -194,9 +198,12 @@ class TraveService extends React.Component {
           <button onClick={this.submit}>提交</button>
           <hr/>
           {/* context */}
+
           <ThemeContext.Provider value={this.state}>
             <Toolbar />
           </ThemeContext.Provider>
+          <br/>
+          <Button onClick={throttle(this.preventDebounce, 1000)}>防抖</Button>
         </div>
       )
     }
