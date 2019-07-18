@@ -1,3 +1,17 @@
+/**
+ * 管理焦点 ref的使用
+ * 点击button获取焦点
+ * 可以在调用时挂载之后立即调用被点击的事件
+ * eg：
+    this.textInput = React.createRef(); 
+
+    <CustomTextInput ref={this.textInput}/> 
+    
+    componentDidMount() {
+      this.textInput.current.focusTextInput();
+    }
+ */
+
 import React,{ Component } from 'react';
 
 export default class CustomTextInput extends React.Component{

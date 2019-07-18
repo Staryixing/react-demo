@@ -1,8 +1,7 @@
 import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
-import style from './Portal.less'
 
-export default function Portal(WrappedComponent){
+export default function DropdownPortal(WrappedComponent){
   return class extends Component{
     constructor(props){
       super(props)
@@ -17,9 +16,7 @@ export default function Portal(WrappedComponent){
     renderContent(){
       return (
         <div>
-          <div className={style.portal} >
-            <WrappedComponent {...this.props}/>
-          </div>
+          <WrappedComponent {...this.props}/>
         </div>
       )
     }

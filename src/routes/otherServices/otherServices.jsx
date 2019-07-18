@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { wallColumn,parkingArea,deviceArea } from '../../mock/mapdata'
-
+import { Button } from 'antd';
 import jinghui from '../../asset/car.jpeg'
 
 const imagePath = "@asset/car.jpeg";
@@ -15,30 +15,14 @@ class OtherServices extends React.Component {
             id: '01',
             x: 200,
             y: 400,
-            w:90,
+            w: 30,
             h: 30
           },{
             id: '02',
             x: 240,
             y: 400,
-            w: 90,
+            w: 30,
             h: 30
-          }
-        ],
-        lockposition: [
-          {
-            id: 1,
-            x: 40,
-            y: 110,
-            w: 60,
-            h: 80
-          },
-          {
-            id: 2,
-            x: 40,
-            y: 200,
-            w: 60,
-            h: 80
           }
         ],
         parkspace:[
@@ -50,12 +34,28 @@ class OtherServices extends React.Component {
             h: 80
           }
         ],
-        planroute: [[100, 100],[400,260]]
+        planroute: [[100, 100],[400,260]],
+        carLineMove: false,
+        carLine: [
+          {
+            x:0,
+            y:0
+          },{
+            x:0,
+            y:0
+          }
+        ]
       }
-      this.rightMove = this.rightMove.bind(this)
+      this.rightMove = this.rightMove.bind(this);
+      this.mousemove =  this.mousemove.bind(this);
+      this.mouseup = this.mouseup.bind(this);
+      this.handleLine = this.handleLine.bind(this);
     }
     componentDidMount(){
-      this.run1()
+      this.run1();
+      this.handleLine();
+      this.svgRef.addEventListener('mousemove', this.mousemove)
+      this.svgRef.addEventListener('mouseup', this.mouseup)
     }
 
     rightMove(){
@@ -79,6 +79,45 @@ class OtherServices extends React.Component {
      return path;
     }
 
+    mouseDown=(param)=>{
+      let path = [
+        {
+          x: param.x + 15, // 15为小车的宽
+          y: param.y + 15
+        },{
+          x: param.x + 15,
+          y: param.y + 15
+        }
+      ]
+      this.setState({
+        carLineMove: true,
+        carLine: path
+      })
+    }
+    mouseup(){
+      this.setState({
+        carLineMove: false,
+      })
+    }
+    mousemove(e){
+      if(this.state.carLineMove){
+        this.setState((state, props) => {
+          let path = [
+            {
+              x: state.carLine[0].x,
+              y: state.carLine[0].y
+            },{
+              x: e.clientX,
+              y: e.clientY -90 // 90为顶部导航栏的高度
+            }
+          ]
+          return {
+            carLine: path
+          }
+        })
+      }
+      
+    }
     run1 (){
       let w = 1200,
           h =870,
@@ -87,7 +126,6 @@ class OtherServices extends React.Component {
           y= d3.scaleLinear().domain([0, 1]).range([h - p, p]);
 
       let svg = d3.select("svg");
-
       var grid = svg.selectAll(".grid")
         .data(x.ticks(40))
         .enter().append("g")
@@ -116,6 +154,7 @@ class OtherServices extends React.Component {
       .y(function(d){
         return d.y
       })
+      
       // 墙柱障碍物
       var border = svg.selectAll("borders").data(wallColumn).enter().append("path")
       .attr('stroke', 'rgb(250,250,250)')
@@ -193,37 +232,86 @@ class OtherServices extends React.Component {
             return d.y
           })
           .attr("xlink:href", jinghui)
-          .on("click", function(d){
-            let self = this;
-            console.log('d',d)
-            
+          .on('mousedown',(e) => {
+            let param = JSON.parse(JSON.stringify(e))
+            this.mouseDown(param)
           })
+        
 
-          // 路线图
-          var paths = svg.append("path")
-          .style("fill", "none")
-          .style("stroke", "rgb(122,135,115)")
-          .style("stroke-dasharray", "10, 4")
-          .attr("d", lineGenerator(this.state.planroute))
-            // 路线头
-          var startCircle = svg
-          .append('circle')
-          .attr("fill", "rgb(222,168,74)")
-          .attr("cx",this.state.planroute[0][0])
-          .attr("cy",this.state.planroute[0][1])
-          .attr('r', 6)
+        // 路线图
+        svg.selectAll('.drawLineCont').data([1]).enter().append('g').attr('class', 'drawLineCont')
 
-            // 路线尾
-          let water = svg.append("path")
-            .attr('d', this.generatePath(this.state.planroute[1][0], this.state.planroute[1][1], 10, 63, 20))
-            .attr('fill', 'rgb(220,174,70)')
+        // var paths = svg.append("path")
+        // .style("fill", "none")
+        // .style("stroke", "rgb(122,135,115)")
+        // .style("stroke-dasharray", "10, 4")
+        // .attr("d", lineGenerator(this.state.planroute))
+        //   // 路线头
+        // var startCircle = svg
+        // .append('circle')
+        // .attr("fill", "rgb(222,168,74)")
+        // .attr("cx",this.state.planroute[0][0])
+        // .attr("cy",this.state.planroute[0][1])
+        // .attr('r', 6)
+
+        //   // 路线尾
+        // let water = svg.append("path")
+        //   .attr('d', this.generatePath(this.state.planroute[1][0], this.state.planroute[1][1], 10, 63, 20))
+        //   .attr('fill', 'rgb(220,174,70)')
     }
-    
+    handleLine(){
+      let lineGenerator = d3.line().x(function(d){
+        return d.x
+      }).y(function(d){
+        return d.y
+      })
+
+      const handlePath = ( target ) => {
+        target.attr('class','drawLine')
+        .style("stroke", 'rgb(122,135,115)')
+        .style("stroke-dasharray", "10, 4")
+        .attr('stroke-width', '2')
+        .attr('d',lineGenerator(this.state.carLine))
+      }
+      
+      handlePath(d3.select('.drawLineCont').selectAll('.drawLine').data([1]))
+      handlePath(d3.select('.drawLineCont').selectAll('.drawLine').data([1]).enter().append('path'))
+      d3.select('.drawLineCont').exit().remove() 
+    }
+    download(){
+      let svg=d3.select("#svg")
+      var serializer = new XMLSerializer();
+      var source = serializer.serializeToString(svg.node());
+      
+      source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+      var url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+      document.write('<img src="' + url + '"/>');
+      var canvas = document.createElement("canvas");
+      canvas.width = 1200;
+      canvas.height = 875;
+  
+      var context = canvas.getContext("2d");
+      var image = new Image;
+      image.src = document.getElementsByTagName('img')[0].src;
+      image.onload = function() {
+          context.drawImage(image, 0, 0);
+          var a = document.createElement("a");
+          a.download = "map.png";
+          a.href = canvas.toDataURL("image/png");
+          a.click();
+      };
+    }
+
     render() {
         return (
             <div>
-              <svg width="1200" height="870" style={{ backgroundColor: 'rgb(59,72,185)' }}></svg>
+              <svg 
+                id="svg"
+                ref = {ref => this.svgRef = ref}
+                width="1200" height="870" style={{ backgroundColor: 'rgb(59,72,185)' }}></svg>
+                {this.handleLine()}
               <button onClick={ this.rightMove }>右移</button>
+              <Button onClick={this.download}>下载</Button>
             </div>
         )
     }

@@ -80,7 +80,7 @@ module.exports = override(
   }),
   addLessLoader({
     javascriptEnabled: true,
-    modifyVars: { '@primary-color': '#4EBACC' },
+    modifyVars: { '@primary-color': '#1890ff' },
     }),
   configLessLoader,
   configAlias,

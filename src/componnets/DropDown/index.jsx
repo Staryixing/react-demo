@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import Portal from '../../common/Portal'
+import DropdownPortal from '../../common/DropdownPortal'
 import styl from './index.less'
 
 class DropDown extends React.Component {
@@ -7,30 +7,25 @@ class DropDown extends React.Component {
     super(props);
     this.el = document.createElement('div');
   }
-  
 
-  onOpen = ()=>{
-    this.props.onOpen()
+  onShow = ()=>{
+    this.props.onShow()
   }
   onClose =()=> {
-    this.props.onCancel();
+    this.props.onClose();
   }
   render() {
-    const {hide,visible,style,className,title,onOK,onCancel} = this.props;
+    const { visible,style } = this.props;
      //合并style
     let newStyle = Object.assign({},style,{
-        display:visible?"block":"false",
+        display: visible?"block":"false",
     });
     return (
-      <div style={newStyle} className={styl.modelContent} onMouseEnter={this.onOpen} onMouseLeave={this.onClose}>
-        <h4>
-          {title}
-          <b>关闭</b>
-        </h4>
+      <div style={newStyle} className={styl.modelContent} onMouseEnter={this.onShow} onMouseLeave={this.onClose}>
         {this.props.children}
       </div>
     )
   }
 }
 
-export default Portal(DropDown)
+export default DropdownPortal(DropDown)

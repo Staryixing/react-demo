@@ -361,7 +361,7 @@ const Utils = {
  * @returns function
  */
 
-throttle = (func, delay)=> {
+function throttle (func, delay){
   let oldDate = 0;
   return function(){
     let newDate = new Date();
@@ -371,6 +371,7 @@ throttle = (func, delay)=> {
     }
   }
 }
+
 /**
  * 防抖函数
  * 
