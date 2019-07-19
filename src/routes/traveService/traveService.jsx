@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import DropDownCom from '@componnets/DropDown/DropDown.jsx';
-
-import NewComponent from '@common/Input.js';
+import InputCom from '@componnets/InputCom/index.jsx'
 import { debounce,throttle } from '@utils/util.js';
 
 const ThemeContext = React.createContext({
@@ -76,7 +75,9 @@ class TraveService extends React.Component {
   } 
 
   
-    
+    submit = () => {
+      console.log(this.props, 'porps')
+    }
     /**防抖 */
     preventDebounce = () => {
       console.log('打印')
@@ -86,14 +87,22 @@ class TraveService extends React.Component {
     render() {
       return (
         <div>
+          
           <DropDownCom overlay={menu}>
             <span>显示</span>
           </DropDownCom>
 
+          <div>
+            <InputCom></InputCom>
+          </div>
+
+
+          <hr/>
+          {/* context */}
+
           <ThemeContext.Provider value={this.state}>
             <Toolbar />
           </ThemeContext.Provider>
-          
           <br/>
           <Button onClick={throttle(this.preventDebounce, 1000)}>防抖</Button>
         </div>
@@ -101,4 +110,4 @@ class TraveService extends React.Component {
     }
 }
 
-export default NewComponent(TraveService)
+export default TraveService
