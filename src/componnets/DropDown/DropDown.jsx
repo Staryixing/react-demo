@@ -53,12 +53,12 @@ class DropDownCom extends Component{
             top: this.state.dtop,
           }}
           visible={this.state.dialogVisible}
+          foo = '123'
           onShow={this.open}
           onClose={this.close}
           >
             {this.props.overlay}
         </DropDown>
-
         <div onClick={this.toggleVis} style={{ padding: '4px 6px',background:'#333', display: 'inline-block' }} onMouseLeave={this.onClose}>
           {this.props.children}
         </div>
