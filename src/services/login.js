@@ -10,14 +10,23 @@ class LoginServices extends ApiService{
   getDevices =({
     headers,
     params,
-    needLoading
+    userinfo
   }) => {
     return this.get('/api/test/profile', {
       params,
       headers,
-      needLoading
+      userinfo
     });
   }
+
+  addDevices = ({params, headers, userinfo}) => {
+    return this.post('/api',{
+      headers,
+      params,
+      userinfo
+    })
+  }
+
 }
 
 export default new LoginServices()

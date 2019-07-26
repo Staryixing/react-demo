@@ -14,19 +14,29 @@ class LoginLayout extends Component{
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.loginJump()       
+        this.getMsg()
+        // this.props.loginJump()       
       }
     });
   }
 
   componentDidMount(){
-    // this.getMsg()
+    
   }
 
   async getMsg(){
-    const res = await LoginServices.getDevices({});
+    const res = await LoginServices.getDevices({userinfo: true});
     console.log('res', res)
   }
+
+  async handleAdd(){
+    let params = {
+      name: 'yx'
+    }
+    const res = await LoginServices.addDevices({params: params, userinfo: true});
+    console.log('res', res)
+  }
+
 
   render(){
    const { getFieldDecorator } = this.props.form;
@@ -61,6 +71,7 @@ class LoginLayout extends Component{
               </Form>
             </div>
           </section>
+          <Button onClick={this.handleAdd.bind(this)}>增加</Button>
           <footer className={style.footer}>
               copyright &copy; 2019 
           </footer>

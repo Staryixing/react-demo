@@ -4,11 +4,11 @@ var router = express.Router();
 
 router.use('/profile', function(req, res) {
     console.log(req.body, 'body');
-    var data = Mock.mock({
-      'list|1-10': [{
-        'id|+1': 1
-      }]
-    });
+    var data = {
+      code: 200,
+      message: '操作成功',
+      data: [{id: 1}, {id : 2}]
+    }
     return res.json(data);
 })
 

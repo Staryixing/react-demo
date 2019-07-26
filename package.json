@@ -8,11 +8,13 @@
     "d3": "^5.9.2",
     "dva": "^2.4.1",
     "electron": "^4.1.4",
+    "koa": "^2.7.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^2.1.8",
+    "ws": "^7.1.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
