@@ -15,7 +15,7 @@ class LoginLayout extends Component{
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.getMsg()
-        // this.props.loginJump()       
+        this.props.loginJump()       
       }
     });
   }
@@ -26,7 +26,6 @@ class LoginLayout extends Component{
 
   async getMsg(){
     const res = await LoginServices.getDevices({userinfo: true});
-    console.log('res', res)
   }
 
   async handleAdd(){
@@ -34,7 +33,6 @@ class LoginLayout extends Component{
       name: 'yx'
     }
     const res = await LoginServices.addDevices({params: params, userinfo: true});
-    console.log('res', res)
   }
 
 

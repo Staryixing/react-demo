@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import DropDownCom from '@componnets/DropDown/DropDown.jsx';
 import InputCom from '@componnets/InputCom/index.jsx'
 import { debounce,throttle } from '@utils/util.js';
+import ws from 'websocketjs'
 
 const ThemeContext = React.createContext({
   theme: 'red',
@@ -67,57 +68,65 @@ class TraveService extends React.Component {
       name: 'yx'
     };
   }
-    submit = () => {
-      console.log(this.props, 'porps')
-    }
-    /**防抖 */
-    preventDebounce = () => {
-      console.log('打印')
-    }
 
-    componentDidMount() {
-      this.foo()
-    }
+  componentDidMount() {
+    this.connectApp()
+    this.foo()
+  }
 
-    foo(){
-      var mapfoo = Array.prototype.map? function(a, f){
-        return a.map(f)
-      } : function(a, f){
-        var results = [];
-        for(var i=0,len = a.length;i<len; i++ ){
-          if(i in a) results[i] = f.call(null, a[i], i, a)
-        }
-        return results;
+  connectApp(){
+    console.log('打印')
+    console.log('WebSocket', WebSocket)
+  }
 
+  submit = () => {
+    console.log(this.props, 'porps')
+  }
+  /**防抖 */
+  preventDebounce = () => {
+    console.log('打印')
+  }
+
+  foo(){
+    var mapfoo = Array.prototype.map? function(a, f){
+      return a.map(f)
+    } : function(a, f){
+      var results = [];
+      for(var i=0,len = a.length;i<len; i++ ){
+        if(i in a) results[i] = f.call(null, a[i], i, a)
       }
+      return results;
 
-       // 高阶函数
-      function not(f){
-        return function() {
-          var result = f.apply(this, arguments);
-          return !result;
-        }
-      }
-      var even = function(x){
-        return x % 2 === 0
-      }
-      
-      var odd = not(even)
-      let arr3 = [1,2,3,4,5,6]
-      arr3.every(odd);
-
-
-      let arr1 = [1,2,3,4];
-      let f = function(item){
-          return item*3
-      }
-      arr1 = mapfoo(arr1, f);
-      console.log(arr1,'arr1')
     }
-    handleValue = (value) => {
-      console.log(value,'123')
+
+      // 高阶函数
+    function not(f){
+      return function() {
+        var result = f.apply(this, arguments);
+        return !result;
+      }
     }
-    render() {
+    var even = function(x){
+      return x % 2 === 0
+    }
+    
+    var odd = not(even)
+    let arr3 = [1,2,3,4,5,6]
+    arr3.every(odd);
+
+
+    let arr1 = [1,2,3,4];
+    let f = function(item){
+        return item*3
+    }
+    arr1 = mapfoo(arr1, f);
+  }
+
+  handleValue = (value) => {
+    
+  }
+
+  render() {
       return (
         <div>
           <div>

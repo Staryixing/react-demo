@@ -1,8 +1,8 @@
 import React from 'react';
 import Mouse from '@componnets/CatMouse/MouseWithCat/index.jsx';
 import Cat from '@componnets/CatMouse/cat/index.jsx';
+import style from './publicSecurity.less';
 
-import style from './publicSecurity.less'
 const navlist = [
   {
     name: "首页",
@@ -137,6 +137,7 @@ class PublicSecurity extends React.Component {
     componentDidMount(){
      // console.log("返回", this.foo(navlist));
     }
+    
     // 递归例子
     foo = (arr) => {
       let arr2 = [];
