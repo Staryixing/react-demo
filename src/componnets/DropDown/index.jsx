@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import DropdownPortal from '../../common/DropdownPortal'
 import styl from './index.less'
 
-class DropDown extends React.Component {
+class DropDown extends Component {
   constructor(props) {
     super(props);
     this.el = document.createElement('div');

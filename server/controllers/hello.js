@@ -1,6 +1,10 @@
 var fn_hello = async (ctx, next) => {
     var name = ctx.params.name;
-    ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+    let data = {
+      name: 'yx'
+    }
+    console.log(ctx.response.type, '222')
+    ctx.response.body = data;
 };
 
 module.exports = {

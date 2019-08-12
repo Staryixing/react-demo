@@ -53,7 +53,6 @@ class DropDownCom extends Component{
             top: this.state.dtop,
           }}
           visible={this.state.dialogVisible}
-          foo = '123'
           onShow={this.open}
           onClose={this.close}
           >

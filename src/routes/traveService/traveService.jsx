@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import style from './traveService.less';
 import DropDownCom from '@componnets/DropDown/DropDown.jsx';
 import InputCom from '@componnets/InputCom/index.jsx'
 import { debounce,throttle } from '@utils/util.js';
@@ -45,7 +46,7 @@ function Toolbar(){
 }
 
 const menu = (
-  <ul>
+  <ul className={style.menuClass}>
     <li>菜单一</li>
     <li>菜单二</li>
     <li>菜单三</li>
