@@ -3,7 +3,7 @@ var fn_hello = async (ctx, next) => {
     let data = {
       name: 'yx'
     }
-    console.log(ctx.response.type, '222')
+    // console.log(ctx.response.type, '222')
     ctx.response.body = data;
 };
 
