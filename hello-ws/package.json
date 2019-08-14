@@ -1,0 +1,14 @@
+{
+  "name": "hello-ws",
+  "version": "1.0.0",
+  "description": "websorket hello demo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yixing",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^7.1.2"
+  }
+}
