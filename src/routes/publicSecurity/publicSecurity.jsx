@@ -31,6 +31,7 @@ class PublicSecurity extends React.Component {
       return (
         <div className={style.root}>
             <section className={style.content}>
+              {/* themecontext的provider 将value分发下去 */}
               <ThemeContext.Provider value={this.state.theme} >
                 <div className={style.titleBar}>
                   <section>

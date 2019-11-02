@@ -15,9 +15,7 @@ export default function DropdownPortal(WrappedComponent){
     }
     renderContent(){
       return (
-        <div>
-          <WrappedComponent {...this.props}/>
-        </div>
+        <WrappedComponent {...this.props}/>
       )
     }
     render(){

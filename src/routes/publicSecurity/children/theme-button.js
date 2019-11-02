@@ -17,7 +17,7 @@ class ThemeButton extends Component{
     )
   }
 }
-
+// 接收 ThemeContext的数据 为this.context
 ThemeButton.contextType = ThemeContext
 
 ThemeButton.propTypes = {

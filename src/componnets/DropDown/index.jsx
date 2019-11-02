@@ -1,31 +1,32 @@
 import React,{ Component } from 'react';
-import DropdownPortal from '../../common/DropdownPortal'
-import styl from './index.less'
+import PropTypes from 'prop-types';
+import orginStyle from './index.less';
 
-class DropDown extends Component {
+class DropDownCont extends Component {
   constructor(props) {
     super(props);
-    this.el = document.createElement('div');
   }
 
-  onShow = ()=>{
-    this.props.onShow()
-  }
-  onClose =()=> {
-    this.props.onClose();
-  }
   render() {
     const { visible,style } = this.props;
      //合并style
     let newStyle = Object.assign({},style,{
-        display: visible?"block":"false",
+        display: visible ? "block":"none",
     });
     return (
-      <div style={newStyle} className={styl.modelContent} onMouseEnter={this.onShow} onMouseLeave={this.onClose}>
+      <div style={newStyle} className={orginStyle.modelContent}>
         {this.props.children}
       </div>
     )
   }
 }
-
-export default DropdownPortal(DropDown)
+DropDownCont.propTypes = {
+  style: PropTypes.object,
+  visible: PropTypes.bool,
+}
+DropDownCont.defaultProps = {
+  style: {},
+  visible: false,
+}
+// export default DropdownPortal(DropDownCont) 
+export default DropDownCont

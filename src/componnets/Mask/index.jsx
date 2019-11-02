@@ -28,13 +28,18 @@
 */
 import React,{ Component } from 'react';
 import { Button } from 'antd';
-import Portal from '../../common/Portal'
-import originalStyle from './index.less'
+import Portal from './Portal';
+import originalStyle from './index.less';
 
 class Model extends React.Component {
   constructor(props) {
     super(props);
     this.el = document.createElement('div');
+  }
+  componentWillReceiveProps(newProps){
+    if(!newProps.hidefoo){
+      this.onCancel();
+    }
   }
   onOK = ()=>{
       this.props.onOK();
@@ -44,16 +49,19 @@ class Model extends React.Component {
       this.props.onCancel();
       this.props.hide();
   };
-  
 
+  handleClick(e){
+    e.stopPropagation()
+  }
+    
   render() {
-    const {hide,visible,style,className,title,onOK,onCancel} = this.props;
+    const {hide,visible,style,title,onOK,onCancel} = this.props;
      //合并style
     let newStyle = Object.assign({},style,{
         display:visible?"block":"false",
     });
     return (
-      <div style={newStyle} className={originalStyle.modelContent}>
+      <div style={newStyle} className={originalStyle.modelContent} onClick={(e)=>this.handleClick(e)}>
         <header className={originalStyle.header}>
           <h4>
             {title}

@@ -1,26 +1,25 @@
 import React,{Component} from 'react';
-import DropDown from './index.jsx';
+import PropTypes from 'prop-types';
+import style from './index.less';
 
-class DropDownCom extends Component{
+class DropDown extends Component{
   constructor(props){
     super(props)
     this.state ={
-      dialogVisible: false
+      dialogVisible: false,
     }
   }
-
+  componentWillReceiveProps(newProps){
+    if(!newProps.showor){
+      this.setState({
+        dialogVisible: false
+      })
+    }
+  }
   toggleVis = (e)=>{
     e.persist()
     this.setState({
-        dialogVisible:!this.state.dialogVisible,
-        dtop: e.clientY + 20,
-        dleft: e.clientX
-    })
-  };
-
-  open = ()=>{
-    this.setState({
-      delay: true
+      dialogVisible:!this.state.dialogVisible,
     })
   };
 
@@ -30,41 +29,31 @@ class DropDownCom extends Component{
     })
   };
 
-  onClose =()=> {
-    this.setState({
-      delay: false
-    })
-    setTimeout(() => {
-      if(!this.state.delay){
-        this.setState({
-          dialogVisible:false
-        })
-      }
-    }, 200)
-  };
-
   render(){
+    let newStyle = Object.assign({},style,{
+        display: this.state.dialogVisible ? "block":"none",
+    });
     return (
-      <div>
-        <DropDown
-          // 自定义的style
-          style={{
-            left: this.state.dleft,
-            top: this.state.dtop,
-          }}
-          visible={this.state.dialogVisible}
-          onShow={this.open}
-          onClose={this.close}
-          >
-            {this.props.overlay}
-        </DropDown>
-        <div onClick={this.toggleVis} style={{ padding: '4px 6px',background:'#333', display: 'inline-block' }} onMouseLeave={this.onClose}>
+      <div onBlur={() => {this.close()}} className={style.root} tabIndex='122'>
+         {/* BUTTON按钮 */}
+        <div onClick={this.toggleVis} className={style.selectBtn}>
           {this.props.children}
+        </div>
+        {/* 下拉内容 */}
+        <div style={newStyle} className={style.modelContent}>
+         {this.props.overlay}
         </div>
       </div>
     )
   }
 }
-
-export default DropDownCom
+DropDown.propTypes ={
+  overlay: PropTypes.object,
+  showor: PropTypes.bool
+}
+DropDown.defaultProps ={
+  overlay: () => (<div></div>),
+  showor: true
+}
+export default DropDown
 
