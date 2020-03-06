@@ -29,7 +29,6 @@ class UserLayout extends Component {
   render() {
     return (
       <div>
-        登录页面
         <LoginLayout loginJump={this.loginJump}/>
       </div>
     )

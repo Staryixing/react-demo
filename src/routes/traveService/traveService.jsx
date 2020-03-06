@@ -6,13 +6,11 @@ import InputCom from '@componnets/InputCom/index.jsx';
 import { debounce,throttle } from '@utils/util.js';
 import StaticMethodParent from '../../common/PrivateMethod.js';
 import Header from '@componnets/Select/Header.tsx';
-// import DropDown from '@componnets/DropDown/DropDown.jsx';
-import { DropDown } from 'xdropdown'
+import DropDown from '@componnets/DropDown/DropDown.jsx';
+// import { DropDown } from 'xdropdown'
 
 const net = require('net');
 // import net from 'net'
-
-
 
 const ThemeContext = React.createContext({
   theme: 'red',
