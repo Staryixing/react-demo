@@ -1,10 +1,11 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'dva/router';
 
-import LotteryService from '@routes/lotteryService/lotteryService.jsx'
-import OtherServices from '@routes/otherServices/otherServices'
-import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx'
-import TraveService from '@routes/traveService/traveService.jsx'
+import LotteryService from '@routes/lotteryService/lotteryService.jsx';
+import OtherServices from '@routes/otherServices/otherServices';
+import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx';
+import TraveService from '@routes/traveService/traveService.jsx';
+import UserList from '@routes/userList/userList';
 import style from './mainPage.less'
 
 
@@ -53,6 +54,7 @@ class MainPage extends React.Component {
                   <Route path="/mainpage/publicSecurityServicesMenu" component={PublicSecurity}/>
                   <Route path="/mainpage/lotteryServices" component={LotteryService}/>
                   <Route path="/mainpage/otherServicesMenu" component={OtherServices}/>
+                  <Route path="/mainpage/userlist" component={UserList}/>
                   <Route path="/mainpage" />
                   {/* <Redirect to="/mainpage" /> */}
                 </Switch>

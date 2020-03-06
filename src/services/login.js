@@ -1,7 +1,6 @@
 /**
  * Created by yixing on 2019/6/20.
  */
-
 import ApiService from '@utils/httpRequest/ApiService';
 import Constant from '@constants/requestConstantValue';
 

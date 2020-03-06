@@ -1,0 +1,16 @@
+### 项目结构
+    1. create-react-app 脚手架构建
+    2. 
+#### 客户端
+    1. 登录有http请求
+    2. 路由 rootRoute 为一级路由
+            mainPage 为二级路由
+            该为hashHistory  共有：BrowserHistory、MemoryHistory、HashHistory
+    3. 可以使用ts（为之后添加的）
+
+#### 服务端
+    1. server 文件夹为http服务
+        package.json 里有跨域设置
+    2. hello-ws 文件夹为websocket服务
+
+

@@ -1,7 +1,6 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Icon, Divider } from 'antd';
-
-import LoginLayout from '@componnets/login/loginLayout'
+import { Icon } from 'antd';
+import LoginLayout from '@componnets/login/loginLayout';
 
 const copyright = (
   <Fragment>
