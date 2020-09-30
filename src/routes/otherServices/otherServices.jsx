@@ -34,7 +34,6 @@ class OtherServices extends React.Component {
             h: 80
           }
         ],
-        planroute: [[100, 100],[400,260]],
         carLineMove: false,
         carLine: [
           {
@@ -46,37 +45,14 @@ class OtherServices extends React.Component {
           }
         ]
       }
-      this.rightMove = this.rightMove.bind(this);
       this.mousemove =  this.mousemove.bind(this);
       this.mouseup = this.mouseup.bind(this);
       this.handleLine = this.handleLine.bind(this);
     }
     componentDidMount(){
       this.run1();
-      this.handleLine();
       this.svgRef.addEventListener('mousemove', this.mousemove)
       this.svgRef.addEventListener('mouseup', this.mouseup)
-    }
-
-    rightMove(){
-      console.log('右移')
-      this.setState({
-        planroute: [[200, 200],[500,360]]
-      })
-    }
-
-    generatePath(cx, cy, radius, theta, dy) {
-     theta = Math.PI * theta / 180;
-     var xStart = cx + radius * Math.sin(theta); 
-     var yStart = cy + radius * Math.cos(theta); 
-     
-     var xStop = cx - radius * Math.sin(theta); 
-     var yStop = yStart; 
-    
-     var path = `M ${xStart} ${yStart} A ${radius} ${radius}, 0,1,0, ${xStop} ${yStop} L ${cx} ${cy + dy}`
-     
-     console.log(path)
-     return path;
     }
 
     mouseDown=(param)=>{
@@ -184,40 +160,8 @@ class OtherServices extends React.Component {
         return lineGenerator(d.points)
       })
 
-      // // 锁闭区域
-      // var lock = svg.selectAll("locks").data(this.state.lockposition).enter().append("rect")
-      //   .attr("fill", "rgb(109,83, 154)")
-      //   .attr('stroke', 'rgb(127,113,165)')
-      //   .attr('stroke-width', '2')
-      //   .attr("x", function(d, i){
-      //     return d.x;
-      //   }).attr("y", function(d){
-      //     return d.y; 
-      //   }).attr("width",function(d){
-      //     return d.w
-      //   })
-      //   .attr("height", function(d){
-      //     return d.h
-      //   })
-
-      // 停车位置
-      // let parkspace = svg.selectAll("parks").data(this.state.parkspace).enter().append("rect")
-      //   .attr("fill", "rgb(47,96,162)")
-      //   .attr('stroke', 'rgb(83,164,213)')
-      //   .attr('stroke-width', '2')
-      //   .attr("x", function(d, i){
-      //     return d.x;
-      //   }).attr("y", function(d){
-      //     return d.y; 
-      //   }).attr("width",function(d){
-      //     return d.w
-      //   })
-      //   .attr("height", function(d){
-      //     return d.h
-      //   })
-
-        // 汽车
-       var imgs = svg.selectAll('image').data(this.state.carsposition).enter()
+      // 汽车
+        var imgs = svg.selectAll('image').data(this.state.carsposition).enter()
           .append("image")
           .attr("width",function(d,i){
             return d.w
@@ -236,29 +180,8 @@ class OtherServices extends React.Component {
             let param = JSON.parse(JSON.stringify(e))
             this.mouseDown(param)
           })
-        
-
-        // 路线图
-        svg.selectAll('.drawLineCont').data([1]).enter().append('g').attr('class', 'drawLineCont')
-
-        // var paths = svg.append("path")
-        // .style("fill", "none")
-        // .style("stroke", "rgb(122,135,115)")
-        // .style("stroke-dasharray", "10, 4")
-        // .attr("d", lineGenerator(this.state.planroute))
-        //   // 路线头
-        // var startCircle = svg
-        // .append('circle')
-        // .attr("fill", "rgb(222,168,74)")
-        // .attr("cx",this.state.planroute[0][0])
-        // .attr("cy",this.state.planroute[0][1])
-        // .attr('r', 6)
-
-        //   // 路线尾
-        // let water = svg.append("path")
-        //   .attr('d', this.generatePath(this.state.planroute[1][0], this.state.planroute[1][1], 10, 63, 20))
-        //   .attr('fill', 'rgb(220,174,70)')
     }
+    // 汽车路线绘制
     handleLine(){
       let lineGenerator = d3.line().x(function(d){
         return d.x
@@ -278,6 +201,7 @@ class OtherServices extends React.Component {
       handlePath(d3.select('.drawLineCont').selectAll('.drawLine').data([1]).enter().append('path'))
       d3.select('.drawLineCont').exit().remove() 
     }
+    // 下载
     download(){
       let svg=d3.select("#svg")
       var serializer = new XMLSerializer();
@@ -309,7 +233,6 @@ class OtherServices extends React.Component {
                 id="svg"
                 ref = {ref => this.svgRef = ref}
                 width="1200" height="870" style={{ backgroundColor: 'rgb(59,72,185)' }}></svg>
-                {this.handleLine()}
               <button onClick={ this.rightMove }>右移</button>
               <Button onClick={this.download}>下载</Button>
             </div>

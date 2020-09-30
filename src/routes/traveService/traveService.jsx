@@ -102,11 +102,6 @@ class TraveService extends React.Component {
     })
     let staticMethod = new StaticMethod(); 
     // console.log(staticMethod.getWidth()); 
-    
-
-
-
-
   }
 
   connectApp(){

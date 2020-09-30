@@ -4,7 +4,6 @@ import style from './theme-button.less';
 import { ThemeContext } from './theme-context.js'
 
 class ThemeButton extends Component{
-
   render() {
     let props = this.props;
     let theme = this.context;

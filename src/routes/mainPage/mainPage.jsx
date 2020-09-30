@@ -6,6 +6,9 @@ import OtherServices from '@routes/otherServices/otherServices';
 import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx';
 import TraveService from '@routes/traveService/traveService.jsx';
 import UserList from '@routes/userList/userList';
+import SlideAnimation from '@routes/slideAnimation/index.jsx';
+import ReactHook from '@routes/reackHook/reactHook.jsx';
+
 import style from './mainPage.less'
 
 
@@ -13,7 +16,12 @@ const navList = [
   { name: '首页', pathName: '/mainpage/publicSecurityServicesMenu' },
   { name: '二级路由',pathName:'/mainpage/travelServicesMenu' },
   { name: '摄像头',pathName: '/mainpage/lotteryServices' },
-  { name:'d3作图',pathName: '/mainpage/otherServicesMenu' }
+  { name:'d3作图',pathName: '/mainpage/otherServicesMenu' },
+  {
+    name: '轮播',pathName: '/mainpage/slide'
+  },{
+    name: 'HOOK',pathName: '/mainpage/hook'
+  }
 ]
 
 class MainPage extends React.Component {
@@ -54,7 +62,9 @@ class MainPage extends React.Component {
                   <Route path="/mainpage/publicSecurityServicesMenu" component={PublicSecurity}/>
                   <Route path="/mainpage/lotteryServices" component={LotteryService}/>
                   <Route path="/mainpage/otherServicesMenu" component={OtherServices}/>
+                  <Route  path="/mainpage/slide" component={SlideAnimation} />
                   <Route path="/mainpage/userlist" component={UserList}/>
+                  <Route  path="/mainpage/hook" component={ReactHook} />
                   <Route path="/mainpage" />
                   {/* <Redirect to="/mainpage" /> */}
                 </Switch>

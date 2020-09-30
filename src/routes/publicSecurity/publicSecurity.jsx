@@ -23,7 +23,7 @@ class PublicSecurity extends React.Component {
     }
 
     componentDidMount(){
-
+      
     }
     
 
