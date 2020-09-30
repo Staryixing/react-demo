@@ -1,6 +1,6 @@
 ### 项目构建
     1. create-react-app 脚手架构建
-    2. 
+    
 #### 客户端
     1. 登录有http请求
     2. 路由 rootRoute 为一级路由
