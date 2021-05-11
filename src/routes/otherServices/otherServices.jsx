@@ -6,7 +6,7 @@ import jinghui from '../../asset/car.jpeg'
 
 const imagePath = "@asset/car.jpeg";
 
-class OtherServices extends React.Component {
+class D3Page extends React.Component {
     constructor(props){
       super(props);
       this.state = {
@@ -240,4 +240,4 @@ class OtherServices extends React.Component {
     }
 }
 
-export default OtherServices
+export default D3Page

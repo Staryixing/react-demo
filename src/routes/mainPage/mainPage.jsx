@@ -1,27 +1,27 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'dva/router';
-
-import LotteryService from '@routes/lotteryService/lotteryService.jsx';
-import OtherServices from '@routes/otherServices/otherServices';
 import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx';
-import TraveService from '@routes/traveService/traveService.jsx';
-import UserList from '@routes/userList/userList';
+import BascDemo from '@routes/traveService/traveService.jsx';
+import CameraPage from '@routes/lotteryService/lotteryService.jsx';
+import D3Page from '@routes/otherServices/otherServices';
 import SlideAnimation from '@routes/slideAnimation/index.jsx';
+import UserList from '@routes/userList/userList';
 import ReactHook from '@routes/reackHook/reactHook.jsx';
+import Three  from '@routes/3D/three.jsx';
+import SlideUP from '@routes/slideUp/slideup.jsx';
 
 import style from './mainPage.less'
 
 
 const navList = [
-  { name: '首页', pathName: '/mainpage/publicSecurityServicesMenu' },
-  { name: '二级路由',pathName:'/mainpage/travelServicesMenu' },
-  { name: '摄像头',pathName: '/mainpage/lotteryServices' },
-  { name:'d3作图',pathName: '/mainpage/otherServicesMenu' },
-  {
-    name: '轮播',pathName: '/mainpage/slide'
-  },{
-    name: 'HOOK',pathName: '/mainpage/hook'
-  }
+  { name: 'HOOK', pathName: '/mainpage/publicSecurity' },
+  { name: 'JS基本测试',pathName:'/mainpage/bascdemo' },
+  { name: '摄像头',pathName: '/mainpage/camera' },
+  { name:'d3作图',pathName: '/mainpage/d3page' },
+  { name: '轮播',pathName: '/mainpage/slide' },
+  { name: 'HOOK基本测试',pathName: '/mainpage/hook'},
+  { name: 'ThreeJs',pathName: '/mainpage/three' },
+  { name: '向上滑动',pathName: '/mainpage/slideup' }
 ]
 
 class MainPage extends React.Component {
@@ -42,32 +42,37 @@ class MainPage extends React.Component {
             <div className={style.title}>
               DEMO
             </div>
-            <div className={style.navList}>
-              {
-                navList.map((item, index) => {
-                  return <label key={index} onClick={() => this.jumpToFunctionPage(item.pathName)}>{item.name}</label>
-                })
-              }
-            </div>
         </div>
     }
 
     render() {
         return (
             <div style={{ height: '100%', width: '100%' }}>
-              <div className = {style.titleBarRoot} >{ this.renderTitleBar() }</div>
+              <header className = {style.titleBarRoot} >{ this.renderTitleBar() }</header>
               <div className={style.content}>
-                <Switch>
-                  <Route path="/mainpage/travelServicesMenu" component={TraveService}/>
-                  <Route path="/mainpage/publicSecurityServicesMenu" component={PublicSecurity}/>
-                  <Route path="/mainpage/lotteryServices" component={LotteryService}/>
-                  <Route path="/mainpage/otherServicesMenu" component={OtherServices}/>
-                  <Route  path="/mainpage/slide" component={SlideAnimation} />
-                  <Route path="/mainpage/userlist" component={UserList}/>
-                  <Route  path="/mainpage/hook" component={ReactHook} />
-                  <Route path="/mainpage" />
-                  {/* <Redirect to="/mainpage" /> */}
-                </Switch>
+                <nav className={style.nav_cont}>
+                  {
+                    navList.map((item, index) => {
+                      return <div key={index} onClick={() => this.jumpToFunctionPage(item.pathName)} 
+                      >{item.name}</div>
+                    })
+                  }
+                </nav>
+                <main>
+                  <Switch>
+                    <Route path="/mainpage/publicSecurity" component={PublicSecurity}/>
+                    <Route path="/mainpage/bascdemo" component={BascDemo}/>
+                    <Route path="/mainpage/camera" component={CameraPage}/>
+                    <Route path="/mainpage/d3page" component={D3Page}/>
+                    <Route path="/mainpage/slide" component={SlideAnimation} />
+                    <Route path="/mainpage/userlist" component={UserList}/>
+                    <Route path="/mainpage/hook" component={ReactHook} />
+                    <Route path="/mainpage/three" component={Three} />
+                    <Route path="/mainpage/slideup" component={SlideUP} />
+                    <Route path="/mainpage" />
+                    {/* <Redirect to="/mainpage" /> */}
+                  </Switch>
+                </main>
               </div>
             </div>
         )

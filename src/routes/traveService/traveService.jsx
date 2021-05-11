@@ -73,7 +73,7 @@ class StaticMethod extends StaticMethodParent{
   }
 }
 
-class TraveService extends React.Component {
+class BascDemo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -267,4 +267,4 @@ class TraveService extends React.Component {
   }
 }
 
-export default TraveService
+export default BascDemo

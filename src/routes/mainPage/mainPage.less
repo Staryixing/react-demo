@@ -2,10 +2,17 @@
 .content{
     height:100%;
     width:100%;
-    box-sizing: border-box;
     display: flex;
-    background-size:cover;
-    position: relative;
+    flex-direction: row;
+    .nav_cont{
+        width: 180px;
+        text-align: center;
+        div{
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+        }
+    }
 }
 .titleBarRoot{
   background-color: @fill-title;

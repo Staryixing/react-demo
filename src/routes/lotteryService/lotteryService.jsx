@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'dva/router';
 
-class LotteryService extends React.Component {
+class CameraPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -79,4 +79,4 @@ class LotteryService extends React.Component {
     }
 }
 
-export default LotteryService
+export default CameraPage
