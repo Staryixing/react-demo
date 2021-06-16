@@ -154,10 +154,8 @@ class BascDemo extends React.Component {
         if(i in a) results[i] = f.call(null, a[i], i, a)
       }
       return results;
-
     }
-
-      // 高阶函数
+    // 高阶函数
     function not(f){
       return function() {
         var result = f.apply(this, arguments);
@@ -167,17 +165,33 @@ class BascDemo extends React.Component {
     var even = function(x){
       return x % 2 === 0
     }
-    
     var odd = not(even)
     let arr3 = [1,2,3,4,5,6]
     arr3.every(odd);
-
-
     let arr1 = [1,2,3,4];
     let f = function(item){
         return item*3
     }
     arr1 = mapfoo(arr1, f);
+
+    var handler = {
+      get: function(target, name){
+        if(name === 'prototype'){
+          return Object.prototype;
+        }
+        return 'Hello, ' + name;
+      },
+      apply: function (target, thisBinding, args){
+        return args[0];
+      },
+      construct: function(target,agrs){
+        return {value: agrs[1]}
+      }
+    }
+    var fproxy = new Proxy(function (){
+      
+    })
+
   }
 
   handleValue = (value) => {

@@ -1,8 +1,6 @@
 import dva from 'dva'
 import './index.css';
 import router from './router.jsx';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import './rootFontSet'
 
 // 1. 初始化

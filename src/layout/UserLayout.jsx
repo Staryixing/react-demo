@@ -18,7 +18,7 @@ class UserLayout extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props, 'this')
+    // console.log(this.props, 'this')
   }
 
   loginJump(){

@@ -1,6 +1,6 @@
 import React, {useState, useRef}  from 'react';
 import ChildCom from './children/index.jsx';
-
+import sum from './sum';
 
 // function useCount(initialValue){
 //     const [count, setCount] = useState(initialValue)
@@ -40,8 +40,7 @@ export default () => {
             <ChildCom ref ={cRef} value="小熊">
                 <div>子孩子</div>
             </ChildCom>
+            { sum(2,3) }
         </div>
     )
-
-
 }

@@ -1,8 +1,8 @@
 import React,{ Component } from 'react';
 import { connect } from 'dva';
 import { Form, Icon, Input, Button } from 'antd';
-import style from './loginLayout.less'
-import LoginServices from '@services/login'
+import style from './loginLayout.less';
+import LoginServices from '@services/login';
 
 class LoginLayout extends Component{
   constructor(props){
@@ -14,8 +14,10 @@ class LoginLayout extends Component{
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.getMsg()
-        this.props.loginJump()       
+        this.handleLogin({
+          "userName": values.userName,
+          "password": values.password
+        })
       }
     });
   }
@@ -24,8 +26,22 @@ class LoginLayout extends Component{
     
   }
 
-  async getMsg(){
-    const res = await LoginServices.getDevices({userinfo: true});
+  async handleLogin (params){
+    let res = await LoginServices.login({
+      params
+    })
+    if(res && res.code === 200){
+      this.props.loginJump()    
+    }
+  }
+
+  async getMsg(params){
+    const res = await LoginServices.getDevices({
+      params,
+    });
+    if(res && res.code === 200){
+      this.props.loginJump()    
+    }
   }
 
   async handleAdd(){

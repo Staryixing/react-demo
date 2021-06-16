@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, Redirect} from 'dva/router';
+import {Route, Switch} from 'dva/router';
 import PublicSecurity from '@routes/publicSecurity/publicSecurity.jsx';
 import BascDemo from '@routes/traveService/traveService.jsx';
 import CameraPage from '@routes/lotteryService/lotteryService.jsx';
@@ -9,6 +9,7 @@ import UserList from '@routes/userList/userList';
 import ReactHook from '@routes/reackHook/reactHook.jsx';
 import Three  from '@routes/3D/three.jsx';
 import SlideUP from '@routes/slideUp/slideup.jsx';
+import KeepAlive from '@routes/keepalive/index.jsx';
 
 import style from './mainPage.less'
 
@@ -21,7 +22,8 @@ const navList = [
   { name: '轮播',pathName: '/mainpage/slide' },
   { name: 'HOOK基本测试',pathName: '/mainpage/hook'},
   { name: 'ThreeJs',pathName: '/mainpage/three' },
-  { name: '向上滑动',pathName: '/mainpage/slideup' }
+  { name: '向上滑动',pathName: '/mainpage/slideup' },
+  { name: 'keepAlive',pathName: '/mainpage/keepalive' },
 ]
 
 class MainPage extends React.Component {
@@ -33,7 +35,6 @@ class MainPage extends React.Component {
         this.jumpToFunctionPage = this.jumpToFunctionPage.bind(this)
     }
     jumpToFunctionPage(pathName){
-      console.log('pathName',pathName)
       this.props.history.push(pathName)
     }
      // 顶部导航栏
@@ -58,7 +59,7 @@ class MainPage extends React.Component {
                     })
                   }
                 </nav>
-                <main>
+                <main style={{ width: '100%' }}>
                   <Switch>
                     <Route path="/mainpage/publicSecurity" component={PublicSecurity}/>
                     <Route path="/mainpage/bascdemo" component={BascDemo}/>
@@ -69,6 +70,7 @@ class MainPage extends React.Component {
                     <Route path="/mainpage/hook" component={ReactHook} />
                     <Route path="/mainpage/three" component={Three} />
                     <Route path="/mainpage/slideup" component={SlideUP} />
+                    <Route path="/mainpage/keepalive" component={KeepAlive} />
                     <Route path="/mainpage" />
                     {/* <Redirect to="/mainpage" /> */}
                   </Switch>
